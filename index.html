@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ru" prefix="og: https://ogp.me/ns#" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FavGen Pro — Генератор фавиконов + PWA иконок 2025</title>
+    <meta name="description"
+          content="Бесплатный генератор всех фавиконов, PWA-иконок, manifest.json и ZIP-архива за один клик. Поддержка Apple, Android, Windows, Яндекс.">
+    <meta name="keywords"
+          content="генератор фавиконов, pwa иконки, manifest.json, favicon generator, apple touch icon">
+    <meta name="author" content="Andrey Vikulov (VProger)">
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow,max-image-preview:large">
+
+
+    <link rel="canonical" href="https://GITHUB_USER.github.io/REPO_NAME/">
+
+    <link rel="icon" href="./assets/icons/logo.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="./assets/images/preview.jpg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Шрифт -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
+
+    <link rel="preload" href="./assets/css/style.css" as="style">
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <link rel="canonical" href="https://generation-favicon.vproger.ru/">
+    <meta name="theme-color" content="#8b5cf6">
+    <meta name="robots" content="index, follow">
+    <meta name="description"
+          content="Генератор фавиконов, favicon.ico, PNG-иконок, PWA-иконок и manifest.json. ZIP за пару секунд.">
+    <meta property="og:title" content="FavGen Pro — Генератор фавиконов и PWA-иконок 2025">
+    <meta property="og:description"
+          content="Создаёт favicon.ico, PNG-иконки, manifest.json и ZIP. Работает в браузере, бесплатно, без ограничений.">
+    <meta property="og:url" content="https://generation-favicon.vproger.ru/">
+    <meta property="og:image" content="https://generation-favicon.vproger.ru/assets/images/preview.jpg">
+    <meta property="og:type" content="website">
+    <meta property="twitter:card" content="summary_large_image">
+
+    <!-- Основные фавиконки -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="./icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./icon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="./icon-167x167.png">
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js');
+        }
+    </script>
+
+    <!-- JSON-LD -->
+    <!-- TODO: подправь url под GitHub Pages -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "FavGen Pro",
+            "description": "Генератор фавиконов и PWA-иконок с поддержкой всех платформ",
+            "url": "https://GITHUB_USER.github.io/REPO_NAME/",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "Web",
+            "offers": { "@type": "Offer", "price": "0" }
+        }
+    </script>
+
+    <!-- Вендорные библиотеки для ICO и ZIP -->
+    <script src="https://kit.fontawesome.com/6e3ef981cb.js" crossorigin="anonymous"></script>
+    <script src="./assets/js/vendor/jszip.min.js"></script>
+    <script src="./assets/js/vendor/FileSaver.min.js"></script>
+
+    <!-- Твои модули -->
+    <script type="module" src="./assets/js/main.js" defer></script>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){
+            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105208622', 'ym');
+
+        ym(105208622, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/105208622" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+</head>
+<body class="min-h-screen text-gray-900 dark:text-gray-100 transition-colors">
+
+<div class="card">
+    <header class="text-center mb-10">
+        <p class="text-xs uppercase tracking-[0.3em] text-violet-300/80 mb-3">
+            GitHub Pages Ready
+        </p>
+        <h1 class="title text-md">
+            VProger FavGen Pro
+        </h1>
+        <p class="subtitle">
+            Один логотип → Все иконки + ZIP за пару секунд
+        </p>
+
+        <button id="theme-toggle"
+                class="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm
+                   bg-white/5 border border-white/10 hover:bg-white/10 transition">
+            Тёмная тема
+        </button>
+    </header>
+
+    <main>
+        <!-- Зона загрузки -->
+        <div id="drop-zone">
+            <input type="file" id="file-input"
+                   accept=".png,.jpg,.jpeg,.webp,.svg,image/png,image/jpeg,image/webp,image/svg+xml"
+                   class="hidden">
+
+            <div class="flex flex-col items-center gap-3">
+                <div class="text-5xl mb-2">🪄</div>
+                <p class="text-lg font-medium">
+                    Перетащи логотип или кликни
+                </p>
+                <p class="text-sm text-violet-200/80">
+                    Поддержка PNG, SVG, JPG, WebP
+                </p>
+            </div>
+        </div>
+
+        <!-- Превью -->
+        <div id="preview" class="mt-8 hidden text-center">
+            <img id="preview-img"
+                 class="mx-auto max-h-40 rounded-2xl shadow-xl border border-white/10"
+                 alt="Превью иконки">
+
+            <button id="generate-btn"
+                    class="generate-btn mt-8">
+                Сгенерировать все иконки
+            </button>
+        </div>
+
+        <!-- Результат -->
+        <div id="result" class="mt-10 hidden text-center">
+            <div class="bg-green-900/30 border border-green-400/60 rounded-2xl p-6">
+                <h3 class="text-2xl font-bold text-green-200">
+                    Готово! 🚀
+                </h3>
+                <p class="mt-2 text-sm text-green-100/80">
+                    Favicon, Apple touch icons, PWA-иконки и manifest.json собраны в ZIP-архив.
+                </p>
+                <button id="download-zip" class="mt-5" >
+                    Скачать ZIP-архив
+                </button>
+            </div>
+        </div>
+    </main>
+    <section class="contact-section mt-20">
+        <h2 class="contact-title">
+            <i class="fa-solid fa-address-book"></i>
+            Связаться со мной
+        </h2>
+
+        <p class="contact-subtitle">
+            Если вам нужен сайт или backend-разработка — выберите удобный способ связи.
+        </p>
+
+        <div class="contact-grid">
+            <a class="contact-card" href="https://vk.com/vproger_club" target="_blank">
+                <i class="fa-brands fa-vk"></i>
+                <span>VK vproger_club</span>
+                <i class="fa-solid fa-arrow-right arrow"></i>
+            </a>
+
+            <a class="contact-card" href="https://t.me/vproger" target="_blank">
+                <i class="fa-brands fa-telegram"></i>
+                <span>Telegram @vproger</span>
+                <i class="fa-solid fa-arrow-right arrow"></i>
+            </a>
+
+            <a class="contact-card" href="mailto:vproger@vk.com" target="_blank">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Email vproger@vk.com</span>
+                <i class="fa-solid fa-arrow-right arrow"></i>
+            </a>
+
+            <a class="contact-card" href="https://github.com/va-proger" target="_blank">
+                <i class="fa-brands fa-github"></i>
+                <span>GitHub va-proger</span>
+                <i class="fa-solid fa-arrow-right arrow"></i>
+            </a>
+
+            <a class="contact-card" href="https://facebook.com/ruvproger" target="_blank">
+                <i class="fa-brands fa-facebook"></i>
+                <span>Facebook</span>
+                <i class="fa-solid fa-arrow-right arrow"></i>
+            </a>
+        </div>
+    </section>
+    <footer class="mt-10 text-center text-xs text-violet-200/70">
+        <p>
+             © <span id="year"></span> • VProger • Андрей Викулов • <a href="https://vproger.ru">vproger.ru</a>
+        </p>
+    </footer>
+</div>
+<div id="cookieModal" class="cookie-modal">
+    <div class="cookie-content">
+        <p>🍪 Мы используем cookies для улучшения работы сайта. Продолжая использовать сайт, вы соглашаетесь с <a href="/privacy.html" target="_blank">Политикой конфиденциальности</a>.</p>
+        <div class="cookie-actions">
+            <button id="acceptCookies" class="cookie-btn">Принять</button>
+        </div>
+    </div>
+</div>
+<div class="share-widget">
+    <button class="share-btn" id="shareToggle">
+        <i class="fa-solid fa-share-nodes"></i>
+    </button>
+
+    <div class="share-panel" id="sharePanel">
+        <a class="sh vk" data-share="vk"><i class="fa-brands fa-vk"></i></a>
+        <a class="sh tg" data-share="telegram"><i class="fa-brands fa-telegram"></i></a>
+        <a class="sh wa" data-share="whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
+        <a class="sh fb" data-share="facebook"><i class="fa-brands fa-facebook"></i></a>
+        <a class="sh tw" data-share="twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        <a class="sh em" data-share="email"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+</div>
+</body>
+</html>

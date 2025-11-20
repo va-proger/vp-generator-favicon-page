@@ -1,0 +1,365 @@
+/* =====================================================
+   BASE + RESET
+   ===================================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    min-height: 100dvh;
+    display: grid;
+    place-items: center;
+    transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* =====================================================
+   THEME VARIABLES
+   ===================================================== */
+
+/* Светлая тема — значения по умолчанию */
+:root {
+    --bg: #f8faff;
+    --card: rgba(255, 255, 255, 0.7);
+    --text: #1a1a2e;
+    --text-soft: rgba(0, 0, 0, 0.55);
+
+    --border: rgba(0, 0, 0, 0.15);
+
+    --accent: #7c3aed;
+    --accent-rgb: 124, 58, 237; /* фиолетовый */
+}
+
+/* Тёмная тема */
+.dark {
+    --bg: #0f0f0f;
+    --card: rgba(20, 20, 40, 0.7);
+    --text: #e0e0ff;
+    --text-soft: rgba(255, 255, 255, 0.55);
+
+    --border: rgba(255, 255, 255, 0.12);
+
+    --accent: #a78bfa;
+    --accent-rgb: 167, 139, 250;
+}
+
+/* Применение темы */
+body {
+    background: var(--bg);
+    color: var(--text);
+}
+.dark body {
+    background:
+            radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.22), transparent 40%),
+            radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.22), transparent 45%),
+            #0f0f0f;
+    background-attachment: fixed;
+}
+.light body {
+    background:
+            radial-gradient(circle at 15% 25%, rgba(139, 92, 246, 0.18), transparent 45%),
+            radial-gradient(circle at 85% 75%, rgba(236, 72, 153, 0.18), transparent 45%),
+            #f8faff;
+    background-attachment: fixed;
+}
+/* =====================================================
+   CARD (основа layout)
+   ===================================================== */
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(20px);
+    border-radius: 28px;
+    padding: 3rem;
+    max-width: 520px;
+    width: 100%;
+    transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+/* =====================================================
+   TITLES
+   ===================================================== */
+
+.title {
+    font-size: 4rem;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: .5rem;
+    background: linear-gradient(90deg, var(--accent), #ec4899);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--accent);
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+/* =====================================================
+   DROP ZONE
+   ===================================================== */
+
+#drop-zone {
+    border: 3px dashed rgba(var(--accent-rgb), 0.4);
+    background: rgba(var(--accent-rgb), 0.08);
+    border-radius: 24px;
+    padding: 4rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#drop-zone:hover {
+    border-color: rgba(var(--accent-rgb), 0.8);
+    background: rgba(var(--accent-rgb), 0.18);
+    transform: scale(1.02);
+}
+
+/* =====================================================
+   BUTTONS (Primary gradient)
+   ===================================================== */
+
+.generate-btn,
+#download-zip,
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent), #ec4899);
+    color: white;
+    padding: 1rem 2.5rem;
+    border: none;
+    font-weight: 700;
+    border-radius: 16px;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(var(--accent-rgb), 0.4);
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.generate-btn:hover,
+#download-zip:hover,
+.btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(var(--accent-rgb), 0.6);
+}
+
+/* =====================================================
+   RESULT BLOCK
+   ===================================================== */
+
+#result {
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =====================================================
+   SHARE WIDGET
+   ===================================================== */
+
+.share-widget {
+    position: fixed;
+    bottom: 35px;
+    right: 35px;
+    z-index: 9999;
+}
+
+.share-btn {
+    width: 48px;
+    height: 48px;
+    background: rgba(var(--accent-rgb), 0.15);
+    color: var(--text);
+    border: 1px solid rgba(var(--accent-rgb), 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.share-btn:hover {
+    background: rgba(var(--accent-rgb), 0.25);
+}
+
+.share-panel {
+    position: absolute;
+    bottom: 60px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+    backdrop-filter: blur(12px);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+    transition: 0.3s ease;
+}
+
+.share-panel.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.share-panel .sh {
+    background: rgba(var(--accent-rgb), 0.1);
+    color: var(--text);
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.share-panel .sh:hover {
+    background: rgba(var(--accent-rgb), 0.25);
+}
+
+/* =====================================================
+   COOKIE MODAL
+   ===================================================== */
+
+.cookie-modal {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 18px 22px;
+    border-radius: 16px;
+    max-width: 90%;
+    width: 650px;
+    color: var(--text);
+    backdrop-filter: blur(16px);
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    transition: 0.25s ease;
+}
+
+.cookie-modal.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.cookie-btn {
+    background: linear-gradient(135deg, var(--accent), #ec4899);
+    padding: 8px 16px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.cookie-btn:hover { opacity: 0.9; }
+
+/* =====================================================
+   CONTACT SECTION
+   ===================================================== */
+
+.contact-section {
+    margin-top: 80px;
+}
+
+.contact-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 14px;
+    color: var(--accent);
+}
+
+.contact-subtitle {
+    font-size: 15px;
+    max-width: 500px;
+    color: var(--text-soft);
+    margin-bottom: 26px;
+}
+
+/* GRID */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+}
+
+@media (min-width: 640px) {
+    .contact-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* CARD */
+.contact-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: rgba(var(--accent-rgb), 0.1);
+    border: 1px solid rgba(var(--accent-rgb), 0.2);
+    border-radius: 14px;
+    backdrop-filter: blur(14px);
+    cursor: pointer;
+    transition: 0.25s ease;
+    color: var(--text);
+    text-decoration: none;
+}
+
+.contact-card:hover {
+    background: rgba(var(--accent-rgb), 0.2);
+    border-color: rgba(var(--accent-rgb), 0.3);
+    transform: translateY(-2px);
+}
+
+.contact-card .arrow {
+    margin-left: auto;
+    opacity: 0.4;
+    transition: 0.25s ease;
+}
+
+.contact-card:hover .arrow {
+    opacity: 1;
+    transform: translateX(4px);
+}
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 640px) {
+    .card {
+        padding: 2rem;
+        border-radius: 20px;
+    }
+
+    .title {
+        font-size: 2.8rem;
+    }
+}
