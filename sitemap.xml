@@ -2,28 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://generation-favicon.vproger.ru/</loc>
-        <lastmod>2025-01-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>1.0</priority>
-    </url>
-
-    <!-- Другие твои поддомены -->
-    <url>
-        <loc>https://retro.vproger.ru/</loc>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://generator.vproger.ru/</loc>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://booksort.vproger.ru/</loc>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Главный сайт -->
-    <url>
-        <loc>https://vproger.ru/</loc>
         <priority>1.0</priority>
     </url>
 </urlset>
