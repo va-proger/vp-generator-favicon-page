@@ -1,6 +1,3 @@
-// generator.js — полный рабочий модуль
-// Требует jszip.min.js и FileSaver.min.js
-
 export async function generateFavicons() {
     if (!window.originalImageData) {
         alert("Сначала загрузите изображение!");
@@ -10,18 +7,15 @@ export async function generateFavicons() {
     const img = await loadImage(window.originalImageData);
     const zip = new JSZip();
 
-    // -------- PNG размеры --------
     const pngSizes = [32, 57, 72, 96, 120, 128, 144, 152, 167, 180, 192, 196, 256, 512];
     for (const size of pngSizes) {
         const blob = await resizeToPng(img, size);
         zip.file(`icons/icon-${size}x${size}.png`, blob);
     }
 
-    // -------- favicon.ico (ручная генерация ICO без библиотек) --------
     const icoBlob = await createIco(img, [16, 24, 32, 48, 64]);
     zip.file("favicon.ico", icoBlob);
 
-    // -------- manifest.json --------
     zip.file("manifest.json", JSON.stringify({
         name: "FavGen Pro",
         short_name: "FavGen",
@@ -36,7 +30,6 @@ export async function generateFavicons() {
         display: "standalone"
     }, null, 2));
 
-    // -------- Скачивание ZIP --------
     lastZipBlob = await zip.generateAsync({ type: "blob" });
 
     document.getElementById("result").classList.remove("hidden");
@@ -51,9 +44,6 @@ export function downloadZipBlob() {
     }
     saveAs(lastZipBlob, "favicons.zip");
 }
-// ==============================
-//  ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
-// ==============================
 
 function loadImage(src) {
     return new Promise(resolve => {
@@ -77,11 +67,6 @@ function resizeToPng(img, size) {
         canvas.toBlob(blob => resolve(blob), "image/png");
     });
 }
-
-// ==============================
-//  Ручная генерация favicon.ico
-// ==============================
-
 async function createIco(image, sizes = [16, 32, 48]) {
     const pngBuffers = [];
 
