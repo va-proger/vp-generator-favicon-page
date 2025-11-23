@@ -1,15 +1,217 @@
 /* =====================================================
    BASE + RESET
    ===================================================== */
+/**
+  Нормализация блочной модели
+ */
 *,
-*::before,
-*::after {
+::before,
+::after {
     box-sizing: border-box;
 }
 
+/**
+  Убираем внутренние отступы слева тегам списков,
+  у которых есть атрибут class
+ */
+:where(ul, ol):where([class]) {
+    padding-left: 0;
+}
+
+/**
+  Убираем внешние отступы body и двум другим тегам,
+  у которых есть атрибут class
+ */
+body,
+:where(blockquote, figure, fieldset):where([class]) {
+    margin: 0;
+}
+
+/**
+  Убираем внешние отступы вертикали нужным тегам,
+  у которых есть атрибут class
+ */
+:where(
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  ul,
+  ol,
+  dl
+):where([class]) {
+    margin-block: 0;
+}
+
+:where(dd[class]) {
+    margin-left: 0;
+}
+
+:where(fieldset[class]) {
+    padding: 0;
+    border: none;
+}
+
+/**
+  Убираем стандартный маркер маркированному списку,
+  у которого есть атрибут class
+ */
+:where(ul[class]) {
+    list-style: none;
+}
+
+:where(address[class]) {
+    font-style: normal;
+}
+
+/**
+  Обнуляем вертикальные внешние отступы параграфа,
+  объявляем локальную переменную для внешнего отступа вниз,
+  чтобы избежать взаимодействие с более сложным селектором
+ */
+p {
+    --paragraphMarginBottom: 24px;
+
+    margin-block: 0;
+}
+
+/**
+  Внешний отступ вниз для параграфа без атрибута class,
+  который расположен не последним среди своих соседних элементов
+ */
+p:where(:not([class]):not(:last-child)) {
+    margin-bottom: var(--paragraphMarginBottom);
+}
+
+
+/**
+  Упрощаем работу с изображениями и видео
+ */
+img,
+video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/**
+  Наследуем свойства шрифт для полей ввода
+ */
+input,
+textarea,
+select,
+button {
+    font: inherit;
+}
+
 html {
+    /**
+      Пригодится в большинстве ситуаций
+      (когда, например, нужно будет "прижать" футер к низу сайта)
+     */
+    height: 100%;
+    /**
+      Убираем скачок интерфейса по горизонтали
+      при появлении / исчезновении скроллбара
+     */
+    scrollbar-gutter: stable;
+    /**
+      Плавный скролл
+     */
     scroll-behavior: smooth;
 }
+
+body {
+    /**
+      Пригодится в большинстве ситуаций
+      (когда, например, нужно будет "прижать" футер к низу сайта)
+     */
+    min-height: 100%;
+    /**
+      Унифицированный интерлиньяж
+     */
+    line-height: 1.5;
+}
+
+/**
+  Нормализация высоты элемента ссылки при его инспектировании в DevTools
+ */
+a:where([class]) {
+    display: inline-flex;
+}
+
+/**
+  Курсор-рука при наведении на элемент
+ */
+button,
+label {
+    cursor: pointer;
+}
+
+/**
+  Убирает серую подсветку при тапе на мобильных устройствах (iOS/Android)
+ */
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут fill со значением 'none' или начинается с 'url')
+ */
+:where([fill]:not(
+  [fill="none"],
+  [fill^="url"]
+)) {
+    fill: currentColor;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут stroke со значением 'none')
+ */
+:where([stroke]:not(
+  [stroke="none"],
+  [stroke^="url"]
+)) {
+    stroke: currentColor;
+}
+
+/**
+  Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+ */
+svg * {
+    transition-property: fill, stroke;
+}
+
+/**
+  Приведение рамок таблиц в классический 'collapse' вид
+ */
+:where(table) {
+    border-collapse: collapse;
+    border-color: currentColor;
+}
+
+/**
+  Удаляем все анимации и переходы для людей,
+  которые предпочитают их не использовать
+ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 
 body {
     margin: 0;
@@ -64,10 +266,51 @@ body {
 }
 .light body {
     background:
-            radial-gradient(circle at 15% 25%, rgba(139, 92, 246, 0.18), transparent 45%),
-            radial-gradient(circle at 85% 75%, rgba(236, 72, 153, 0.18), transparent 45%),
-            #f8faff;
+            radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.20), transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.20), transparent 55%),
+            #f3f0ff;
     background-attachment: fixed;
+}
+.light #theme-toggle {
+    background: rgba(120, 90, 255, 0.12);
+    border-color: rgba(120, 90, 255, 0.25);
+    color: #4b2ea0;
+}
+
+.light #theme-toggle:hover {
+    background: rgba(120, 90, 255, 0.22);
+}
+.light #drop-zone {
+    border: 3px dashed rgba(139, 92, 246, 0.45);
+    background: rgba(139, 92, 246, 0.08);
+}
+
+.light #drop-zone:hover {
+    border-color: rgba(139, 92, 246, 0.75);
+    background: rgba(139, 92, 246, 0.15);
+}
+
+.light #drop-zone p {
+    color: #6b21a8 !important;
+}
+
+.light #drop-zone .text-violet-200\/80 {
+    color: rgba(100, 0, 150, 0.55) !important;
+}
+.light .card {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(90, 60, 200, 0.25);
+}
+
+.light .contact-card {
+    background: rgba(150, 90, 255, 0.1);
+    border-color: rgba(150, 90, 255, 0.25);
+    color: #3c2b6f;
+}
+
+.light .contact-card:hover {
+    background: rgba(150, 90, 255, 0.2);
+    border-color: rgba(150, 90, 255, 0.35);
 }
 /* =====================================================
    CARD (основа layout)
@@ -82,10 +325,6 @@ body {
     width: 100%;
     transition: background 0.4s ease, border-color 0.4s ease;
 }
-
-/* =====================================================
-   TITLES
-   ===================================================== */
 
 .title {
     font-size: 4rem;
@@ -104,10 +343,6 @@ body {
     font-size: 1.25rem;
     margin-bottom: 2rem;
 }
-
-/* =====================================================
-   DROP ZONE
-   ===================================================== */
 
 #drop-zone {
     border: 3px dashed rgba(var(--accent-rgb), 0.4);
@@ -164,9 +399,6 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* =====================================================
-   SHARE WIDGET
-   ===================================================== */
 
 .share-widget {
     position: fixed;
@@ -317,6 +549,21 @@ body {
 }
 
 /* CARD */
+.cc-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.cc-text strong {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.cc-text span {
+    font-size: 12px;
+    opacity: 0.7;
+}
 .contact-card {
     display: flex;
     align-items: center;

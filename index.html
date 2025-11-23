@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>FavGen Pro — Генератор фавиконов + PWA иконок 2025</title>
     <meta name="description"
           content="Бесплатный генератор всех фавиконов, PWA-иконок, manifest.json и ZIP-архива за один клик. Поддержка Apple, Android, Windows, Яндекс.">
@@ -12,37 +11,27 @@
     <meta name="author" content="Andrey Vikulov (VProger)">
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow,max-image-preview:large">
-
-
-    <link rel="canonical" href="https://GITHUB_USER.github.io/REPO_NAME/">
-
     <link rel="icon" href="./assets/icons/logo.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="./assets/images/preview.jpg">
-
+    <link rel="apple-touch-icon" href="./assets/images/preview.png">
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Шрифт -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
-
     <link rel="preload" href="./assets/css/style.css" as="style">
     <link rel="stylesheet" href="./assets/css/style.css">
-
     <link rel="canonical" href="https://generation-favicon.vproger.ru/">
     <meta name="theme-color" content="#8b5cf6">
     <meta name="robots" content="index, follow">
-    <meta name="description"
-          content="Генератор фавиконов, favicon.ico, PNG-иконок, PWA-иконок и manifest.json. ZIP за пару секунд.">
     <meta property="og:title" content="FavGen Pro — Генератор фавиконов и PWA-иконок 2025">
     <meta property="og:description"
           content="Создаёт favicon.ico, PNG-иконки, manifest.json и ZIP. Работает в браузере, бесплатно, без ограничений.">
     <meta property="og:url" content="https://generation-favicon.vproger.ru/">
     <meta property="og:image" content="https://generation-favicon.vproger.ru/assets/images/preview.jpg">
     <meta property="og:type" content="website">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="twitter:card" content="summary_large_image">
-
-    <!-- Основные фавиконки -->
+    <meta name="application-name" content="FavGen Pro">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="./icon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="./icon-96x96.png">
@@ -54,22 +43,23 @@
     <link rel="manifest" href="manifest.json">
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js');
+            navigator.serviceWorker.register('./service-worker.js');
         }
     </script>
 
-    <!-- JSON-LD -->
-    <!-- TODO: подправь url под GitHub Pages -->
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
             "@type": "WebApplication",
             "name": "FavGen Pro",
             "description": "Генератор фавиконов и PWA-иконок с поддержкой всех платформ",
-            "url": "https://GITHUB_USER.github.io/REPO_NAME/",
+            "url": "https://generation-favicon.vproger.ru/",
             "applicationCategory": "DeveloperApplication",
             "operatingSystem": "Web",
-            "offers": { "@type": "Offer", "price": "0" }
+            "offers": {
+                "@type": "Offer",
+                "price": "0"
+            }
         }
     </script>
 
@@ -82,17 +72,41 @@
     <script type="module" src="./assets/js/main.js" defer></script>
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
-        (function(m,e,t,r,i,k,a){
-            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-        })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105208622', 'ym');
+        (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () {
+                (m[i].a = m[i].a || []).push(arguments)
+            };
+            m[i].l = 1 * new Date();
+            for (var j = 0; j < document.scripts.length; j++) {
+                if (document.scripts[j].src === r) {
+                    return;
+                }
+            }
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=105208622', 'ym');
 
-        ym(105208622, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+        ym(105208622, 'init', {
+            ssr: true,
+            webvisor: true,
+            clickmap: true,
+            ecommerce: "dataLayer",
+            accurateTrackBounce: true,
+            trackLinks: true
+        });
     </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/105208622" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/105208622" style="position:absolute; left:-9999px;" alt=""/></div>
+    </noscript>
     <!-- /Yandex.Metrika counter -->
+    <script>
+        // Предотвращаем мигание тем
+        (() => {
+            const saved = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = saved ? saved : (prefersDark ? 'dark' : 'light');
+            document.documentElement.classList.add(theme);
+        })();
+    </script>
 </head>
 <body class="min-h-screen text-gray-900 dark:text-gray-100 transition-colors">
 
@@ -154,7 +168,7 @@
                 <p class="mt-2 text-sm text-green-100/80">
                     Favicon, Apple touch icons, PWA-иконки и manifest.json собраны в ZIP-архив.
                 </p>
-                <button id="download-zip" class="mt-5" >
+                <button id="download-zip" class="mt-5">
                     Скачать ZIP-архив
                 </button>
             </div>
@@ -171,46 +185,65 @@
         </p>
 
         <div class="contact-grid">
+
             <a class="contact-card" href="https://vk.com/vproger_club" target="_blank">
                 <i class="fa-brands fa-vk"></i>
-                <span>VK vproger_club</span>
+                <div class="cc-text">
+                    <strong>VK</strong>
+                    <span>vproger_club</span>
+                </div>
                 <i class="fa-solid fa-arrow-right arrow"></i>
             </a>
 
             <a class="contact-card" href="https://t.me/vproger" target="_blank">
                 <i class="fa-brands fa-telegram"></i>
-                <span>Telegram @vproger</span>
+                <div class="cc-text">
+                    <strong>Telegram</strong>
+                    <span>@vproger</span>
+                </div>
                 <i class="fa-solid fa-arrow-right arrow"></i>
             </a>
 
             <a class="contact-card" href="mailto:vproger@vk.com" target="_blank">
                 <i class="fa-solid fa-envelope"></i>
-                <span>Email vproger@vk.com</span>
+                <div class="cc-text">
+                    <strong>Email</strong>
+                    <span>vproger@vk.com</span>
+                </div>
                 <i class="fa-solid fa-arrow-right arrow"></i>
             </a>
 
             <a class="contact-card" href="https://github.com/va-proger" target="_blank">
                 <i class="fa-brands fa-github"></i>
-                <span>GitHub va-proger</span>
+                <div class="cc-text">
+                    <strong>GitHub</strong>
+                    <span>va-proger</span>
+                </div>
                 <i class="fa-solid fa-arrow-right arrow"></i>
             </a>
 
             <a class="contact-card" href="https://facebook.com/ruvproger" target="_blank">
                 <i class="fa-brands fa-facebook"></i>
-                <span>Facebook</span>
+                <div class="cc-text">
+                    <strong>Facebook</strong>
+                    <span>Профиль</span>
+                </div>
                 <i class="fa-solid fa-arrow-right arrow"></i>
             </a>
+
         </div>
+
     </section>
     <footer class="mt-10 text-center text-xs text-violet-200/70">
         <p>
-             © <span id="year"></span> • VProger • Андрей Викулов • <a href="https://vproger.ru">vproger.ru</a>
+            © <span id="year"></span> • VProger • Андрей Викулов • <a href="https://vproger.ru">vproger.ru</a>
         </p>
     </footer>
 </div>
 <div id="cookieModal" class="cookie-modal">
     <div class="cookie-content">
-        <p>🍪 Мы используем cookies для улучшения работы сайта. Продолжая использовать сайт, вы соглашаетесь с <a href="/privacy.html" target="_blank">Политикой конфиденциальности</a>.</p>
+        <p>🍪 Мы используем cookies для улучшения работы сайта. Продолжая использовать сайт, вы соглашаетесь с <a
+                href="/privacy.html" target="_blank">Политикой конфиденциальности</a>.</p>
         <div class="cookie-actions">
             <button id="acceptCookies" class="cookie-btn">Принять</button>
         </div>
@@ -222,12 +255,12 @@
     </button>
 
     <div class="share-panel" id="sharePanel">
-        <a class="sh vk" data-share="vk"><i class="fa-brands fa-vk"></i></a>
-        <a class="sh tg" data-share="telegram"><i class="fa-brands fa-telegram"></i></a>
-        <a class="sh wa" data-share="whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
-        <a class="sh fb" data-share="facebook"><i class="fa-brands fa-facebook"></i></a>
-        <a class="sh tw" data-share="twitter"><i class="fa-brands fa-x-twitter"></i></a>
-        <a class="sh em" data-share="email"><i class="fa-solid fa-envelope"></i></a>
+        <a class="sh" data-share="vk"><i class="fa-brands fa-vk"></i></a>
+        <a class="sh" data-share="telegram"><i class="fa-brands fa-telegram"></i></a>
+        <a class="sh" data-share="whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
+        <a class="sh" data-share="facebook"><i class="fa-brands fa-facebook"></i></a>
+        <a class="sh" data-share="twitter"><i class="fa-brands fa-x-twitter"></i></a>
+        <a class="sh" data-share="email"><i class="fa-solid fa-envelope"></i></a>
     </div>
 </div>
 </body>

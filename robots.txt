@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Главный сайт
+Sitemap: https://vproger.ru/sitemap.xml
+
+# Поддомены
+Sitemap: https://generation-favicon.vproger.ru/sitemap.xml
+Sitemap: https://retro.vproger.ru/sitemap.xml
+Sitemap: https://generator.vproger.ru/sitemap.xml
+Sitemap: https://booksort.vproger.ru/sitemap.xml
+
+Host: vproger.ru

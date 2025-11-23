@@ -10,19 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('generate-btn').addEventListener('click', generateFavicons);
     document.getElementById('download-zip').addEventListener('click', downloadZipBlob);
 
-    // SHARE
-    const toggle = document.getElementById("shareToggle");
-    const panel = document.getElementById("sharePanel");
-
-    toggle.addEventListener("click", () => {
-        panel.classList.toggle("active");
-    });
-
-    document.addEventListener("click", (e) => {
-        if (!toggle.contains(e.target) && !panel.contains(e.target)) {
-            panel.classList.remove("active");
-        }
-    });
     initCookies();
     initShare();
     const y = document.getElementById("year");

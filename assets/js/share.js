@@ -1,14 +1,29 @@
 import { $, $$ } from "./dom.js";
 
 export function initShare() {
+
     const toggle = $("#shareToggle");
     const panel  = $("#sharePanel");
+
     if (!toggle || !panel) return;
 
-    toggle.addEventListener("click", () => {
+    // ------- ОТКРЫТИЕ ПАНЕЛИ -------
+    toggle.addEventListener("click", (e) => {
+        e.stopPropagation();      // ❗ запрещаем всплытие наверх
         panel.classList.toggle("active");
     });
 
+    // ------- КЛИК ВНУТРИ ПАНЕЛИ -------
+    panel.addEventListener("click", (e) => {
+        e.stopPropagation();      // ❗ панель не должна закрываться
+    });
+
+    // ------- ЗАКРЫТИЕ ВНЕ ПАНЕЛИ -------
+    document.addEventListener("click", () => {
+        panel.classList.remove("active");
+    });
+
+    // ------- ДАННЫЕ ДЛЯ ШАРИНГА -------
     const SHARE = {
         title: document.querySelector("meta[property='og:title']")?.content || document.title,
         desc:  document.querySelector("meta[name='description']")?.content || "",
@@ -24,9 +39,12 @@ export function initShare() {
         email:   `mailto:?subject=${SHARE.title}&body=${SHARE.url}`
     };
 
-    $$.call(panel, "[data-share]").forEach(el => {
-        el.addEventListener("click", () => {
+    // ------- ОБРАБОТЧИКИ КНОПОК -------
+    panel.querySelectorAll("[data-share]").forEach(el => {
+        el.addEventListener("click", (e) => {
+            e.stopPropagation();  // ❗ критично — иначе document закроет панель
             const type = el.dataset.share;
+
             if (links[type]) {
                 window.open(links[type], "_blank", "width=600,height=500");
             }
